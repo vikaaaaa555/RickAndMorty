@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import 'location.dart';
 
-class CharacterEntity {
+class CharacterEntity extends Equatable {
   final int id;
   final String name;
   final String status;
@@ -16,4 +18,7 @@ class CharacterEntity {
     required this.origin,
     required this.image,
   });
+
+  @override
+  List<Object?> get props => [id, name, status, species, origin, image];
 }
