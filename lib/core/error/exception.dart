@@ -13,9 +13,9 @@ class APIException extends Equatable implements Exception {
   List<Object> get props => [message, statusCode];
 }
 
-class UserNotRegisteredException implements Exception {
+class CacheException implements Exception {
   final String message;
-  UserNotRegisteredException(this.message);
+  CacheException(this.message);
 
   @override
   String toString() => message;
