@@ -25,7 +25,11 @@ class APIFailure extends Failure {
 
   APIFailure.fromException(APIException exception)
       : this(
-    message: exception.message,
-    statusCode: exception.statusCode,
-  );
+          message: exception.message,
+          statusCode: exception.statusCode,
+        );
+}
+
+class CacheFailure extends Failure {
+  const CacheFailure() : super(message: "Cache error", statusCode: 0);
 }
