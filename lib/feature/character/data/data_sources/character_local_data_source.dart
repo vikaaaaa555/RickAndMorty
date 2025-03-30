@@ -1,15 +1,23 @@
 import 'dart:convert';
 
-import 'package:rick_and_morty/core/error/exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/error/exception.dart';
+import '../../domain/entities/location.dart';
 import '../models/character_model.dart';
 
 abstract class CharacterLocalDataSource {
   Future<List<CharacterModel>> getFavoriteCharactersFromCache();
-  Future<void> addFavoriteCharacter(CharacterModel characters);
-  Future<void> removeFromFavorites(CharacterModel character);
-  Future<bool> isFavorite(CharacterModel character);
+  Future<void> addFavoriteCharacter(
+      int id,
+      String name,
+      String status,
+      String species,
+      Location origin,
+      String image
+  );
+  Future<void> removeFromFavorites(int id);
+  Future<bool> isFavorite(int id);
 }
 
 const _cachedCharactersList = 'CACHED_CHARACTERS_LIST';
@@ -34,30 +42,53 @@ class CharacterLocalDataSourceImpl implements CharacterLocalDataSource {
   }
 
   @override
-  Future<void> addFavoriteCharacter(CharacterModel character) async {
-    final favorites = await getFavoriteCharactersFromCache();
-    if (!favorites.any((fav) => fav.id == character.id)) {
-      favorites.add(character);
-      final jsonCharactersList =
-          favorites.map((e) => json.encode(e.toJson())).toList();
-      await sharedPreferences.setStringList(
-          _cachedCharactersList, jsonCharactersList);
+  Future<void> addFavoriteCharacter(
+      int id,
+      String name,
+      String status,
+      String species,
+      Location origin,
+      String image
+  ) async {
+    try {
+      final favorites = await getFavoriteCharactersFromCache();
+      if (!favorites.any((fav) => fav.id == id)) {
+        final newCharacter = CharacterModel(
+          id: id,
+          name: name,
+          status: status,
+          species: species,
+          origin: origin,
+          image: image,
+        );
+        favorites.add(newCharacter);
+        final jsonCharactersList = favorites.map((e) => json.encode(e.toJson())).toList();
+        await sharedPreferences.setStringList(_cachedCharactersList, jsonCharactersList);
+      }
+    } catch (e) {
+      throw CacheException();
     }
   }
 
   @override
-  Future<void> removeFromFavorites(CharacterModel character) async {
-    final favorites = await getFavoriteCharactersFromCache();
-    favorites.removeWhere((fav) => fav.id == character.id);
-    final jsonCharactersList =
-        favorites.map((e) => json.encode(e.toJson())).toList();
-    await sharedPreferences.setStringList(
-        _cachedCharactersList, jsonCharactersList);
+  Future<void> removeFromFavorites(int id) async {
+    try {
+      final favorites = await getFavoriteCharactersFromCache();
+      favorites.removeWhere((fav) => fav.id == id);
+      final jsonCharactersList = favorites.map((e) => json.encode(e.toJson())).toList();
+      await sharedPreferences.setStringList(_cachedCharactersList, jsonCharactersList);
+    } catch (e) {
+      throw CacheException();
+    }
   }
 
   @override
-  Future<bool> isFavorite(CharacterModel character) async {
-    final favorites = await getFavoriteCharactersFromCache();
-    return favorites.any((fav) => fav.id == character.id);
+  Future<bool> isFavorite(int id) async {
+    try {
+      final favorites = await getFavoriteCharactersFromCache();
+      return favorites.any((fav) => fav.id == id);
+    } catch (e) {
+      return false;
+    }
   }
 }
