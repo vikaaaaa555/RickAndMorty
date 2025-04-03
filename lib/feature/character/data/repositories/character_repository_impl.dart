@@ -10,15 +10,18 @@ import '../data_sources/character_local_data_source.dart';
 import '../data_sources/character_remote_data_source.dart';
 
 class CharacterRepositoryImpl implements CharacterRepository {
-  final CharacterRemoteDataSource _remoteDataSource;
-  final CharacterLocalDataSource _localDataSource;
+  final CharacterRemoteDataSource remoteDataSource;
+  final CharacterLocalDataSource localDataSource;
 
-  const CharacterRepositoryImpl(this._remoteDataSource, this._localDataSource);
+  const CharacterRepositoryImpl({
+    required this.remoteDataSource,
+    required this.localDataSource
+  });
 
   @override
   ResultFuture<List<CharacterEntity>> getAllCharacters(int page) async {
     try {
-      final result = await _remoteDataSource.getAllCharacters(page);
+      final result = await remoteDataSource.getAllCharacters(page);
       return result;
     } on APIException catch (e) {
       return Left(APIFailure.fromException(e));
@@ -26,16 +29,10 @@ class CharacterRepositoryImpl implements CharacterRepository {
   }
 
   @override
-  ResultVoid<void> addFavoriteCharacter(
-      int id,
-      String name,
-      String status,
-      String species,
-      Location origin,
-      String image
-  ) async {
+  ResultVoid<void> addFavoriteCharacter(int id, String name, String status,
+      String species, Location origin, String image) async {
     try {
-      await _localDataSource.addFavoriteCharacter(
+      await localDataSource.addFavoriteCharacter(
           id, name, status, species, origin, image);
       return const Right(null);
     } on CacheException {
@@ -47,7 +44,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
   @override
   ResultFuture<List<CharacterEntity>> getFavoriteCharactersFromCache() async {
     try {
-      final result = await _localDataSource.getFavoriteCharactersFromCache();
+      final result = await localDataSource.getFavoriteCharactersFromCache();
       return Right(result);
     } on CacheException {
       return const Left(CacheFailure());
@@ -57,7 +54,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
   @override
   ResultFuture<bool> isFavorite(int id) async {
     try {
-      final result = await _localDataSource.isFavorite(id);
+      final result = await localDataSource.isFavorite(id);
       return Right(result);
     } on CacheException {
       return const Left(CacheFailure());
@@ -67,7 +64,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
   @override
   ResultVoid<void> removeFromFavorites(int id) async {
     try {
-      await _localDataSource.removeFromFavorites(id);
+      await localDataSource.removeFromFavorites(id);
       return const Right(null);
     } on CacheException {
       return const Left(CacheFailure());

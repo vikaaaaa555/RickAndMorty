@@ -14,9 +14,9 @@ abstract class CharacterRemoteDataSource {
 }
 
 class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
-  final http.Client _client;
+  final http.Client client;
 
-  CharacterRemoteDataSourceImpl(this._client);
+  CharacterRemoteDataSourceImpl({required this.client});
 
   @override
   ResultFuture<List<CharacterEntity>> getAllCharacters(int page) async {
@@ -25,7 +25,7 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
           Uri.parse('https://rickandmortyapi.com/api/character/?page=$page');
       final headers = { 'Content-Type': 'application/json' };
 
-      final response = await _client.get(url, headers: headers);
+      final response = await client.get(url, headers: headers);
 
       if (response.statusCode != 200) {
         throw APIException(
