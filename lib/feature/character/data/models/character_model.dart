@@ -1,5 +1,6 @@
 import '../../../../core/common/utils/typedefs.dart';
 import '../../domain/entities/character_entity.dart';
+import 'location_model.dart';
 
 class CharacterModel extends CharacterEntity {
   const CharacterModel({
@@ -16,7 +17,7 @@ class CharacterModel extends CharacterEntity {
       name: json['name'],
       status: json['status'],
       species: json['species'],
-      origin: json['origin'],
+      origin: LocationModel.fromJson(json['origin']),
       image: json['image']
   );
 
