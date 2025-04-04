@@ -25,4 +25,12 @@ class TextStyles {
           color: Colors.white,
           letterSpacing: 0.07)
   );
+
+  static TextStyle get white22SemiBold => GoogleFonts.exo2(
+      textStyle: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+          color: Colors.white,
+          letterSpacing: 0.07)
+  );
 }
