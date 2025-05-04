@@ -26,7 +26,7 @@ class CharacterBox extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        height: Media.screenHeight * 0.2,
+        height: Media.screenHeight * 0.25,
         color: AppColors.blackSabbath,
         child: Padding(
           padding: const EdgeInsets.all(10),

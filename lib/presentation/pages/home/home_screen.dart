@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common/utils/constants/styles/text_styles.dart';
 import '../../../feature/character/domain/entities/character_entity.dart';
+import '../../bloc/home/home_bloc.dart';
 import 'widgets/character_box.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +16,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _scrollController = ScrollController();
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 300) {
+      context.read<HomeBloc>().add(const SwipeEvent());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             )
           : CustomScrollView(
+              controller: _scrollController,
               slivers: [
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
