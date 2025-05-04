@@ -10,13 +10,6 @@ class TextStyles {
           letterSpacing: 0.07)
   );
 
-  static TextStyle get white12Medium => GoogleFonts.exo2(
-      textStyle: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-          letterSpacing: 0.07)
-  );
 
   static TextStyle get white16Medium => GoogleFonts.exo2(
       textStyle: const TextStyle(
@@ -26,10 +19,19 @@ class TextStyles {
           letterSpacing: 0.07)
   );
 
-  static TextStyle get white22SemiBold => GoogleFonts.exo2(
+  static TextStyle get white18SemiBoldItalic => GoogleFonts.exo2(
+      textStyle: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          fontStyle: FontStyle.italic,
+          color: Colors.white,
+          letterSpacing: 0.07)
+  );
+
+  static TextStyle get white22Bold => GoogleFonts.exo2(
       textStyle: const TextStyle(
           fontSize: 22,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w700,
           color: Colors.white,
           letterSpacing: 0.07)
   );

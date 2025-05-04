@@ -42,7 +42,7 @@ class CharacterBox extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: TextStyles.white16Medium,
+                      style: TextStyles.white18SemiBoldItalic,
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -58,8 +58,6 @@ class CharacterBox extends StatelessWidget {
                     Text(
                       origin.name,
                       style: TextStyles.white16Medium,
-                      softWrap: true,
-                      overflow: TextOverflow.visible,
                     ),
                   ],
                 ),

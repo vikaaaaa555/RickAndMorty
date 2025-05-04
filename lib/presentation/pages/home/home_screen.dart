@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 import '../../../core/common/utils/constants/styles/text_styles.dart';
 import '../../../feature/character/domain/entities/character_entity.dart';
@@ -15,13 +14,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final logger = Logger();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Home', style: TextStyles.white22SemiBold),
+          title: Text('Home', style: TextStyles.white22Bold),
           centerTitle: true,
           scrolledUnderElevation: 0.0),
       body: widget.characters.isEmpty
@@ -37,14 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       final character = widget.characters[index];
-                      logger.i(
-                          'Location: ${character.origin.name}, image: ${character.origin.url}');
-                      return CharacterBox(
-                          name: character.name,
-                          status: character.status,
-                          species: character.species,
-                          origin: character.origin,
-                          image: character.image);
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: CharacterBox(
+                            name: character.name,
+                            status: character.status,
+                            species: character.species,
+                            origin: character.origin,
+                            image: character.image),
+                      );
                     },
                     childCount: widget.characters.length,
                   ),
