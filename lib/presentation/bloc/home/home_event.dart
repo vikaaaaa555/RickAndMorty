@@ -16,11 +16,7 @@ final class LoadCharactersEvent extends HomeEvent {
 }
 
 final class SwipeEvent extends HomeEvent {
-  final CharacterEntity character;
-  const SwipeEvent({required this.character});
-
-  @override
-  List<Object?> get props => [character];
+  const SwipeEvent();
 }
 
 final class AddToFavoritesEvent extends HomeEvent {

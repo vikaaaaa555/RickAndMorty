@@ -52,7 +52,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           GetAllCharactersParams(page: _currentPage));
 
       result.fold(
-        (failure) => emit(HomeError(failure.message)),
+        (failure) => emit(HomeSuccess(
+          characters: currentState.characters,
+          currentPage: currentState.currentPage,
+          hasMore: false,
+        )),
         (newCharacters) {
           _hasMore = newCharacters.isNotEmpty;
 
@@ -67,10 +71,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _handleAddToFavoritesEvent(
-      AddToFavoritesEvent event, Emitter<HomeState> emit) {
-  }
+      AddToFavoritesEvent event, Emitter<HomeState> emit) {}
 
   void _handleRemoveFromFavoritesEvent(
-      RemoveFromFavoritesEvent event, Emitter<HomeState> emit) {
-  }
+      RemoveFromFavoritesEvent event, Emitter<HomeState> emit) {}
 }
