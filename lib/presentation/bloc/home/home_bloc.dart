@@ -19,7 +19,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<LoadCharactersEvent>(_handleLoadCharactersEvent);
     on<SwipeEvent>(_handleSwipeEvent);
     on<AddToFavoritesEvent>(_handleAddToFavoritesEvent);
-    on<RemoveFromFavoritesEvent>(_handleRemoveFromFavoritesEvent);
   }
 
   Future<void> _handleLoadCharactersEvent(
@@ -72,7 +71,4 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _handleAddToFavoritesEvent(
       AddToFavoritesEvent event, Emitter<HomeState> emit) {}
-
-  void _handleRemoveFromFavoritesEvent(
-      RemoveFromFavoritesEvent event, Emitter<HomeState> emit) {}
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/common/utils/constants/styles/text_styles.dart';
 import '../../bloc/home/home_bloc.dart';
 import 'home_screen.dart';
 
@@ -23,8 +24,10 @@ class HomeScreenWrapper extends StatelessWidget {
         return HomeScreen(characters: state.characters);
       } else if (state is HomeError) {
         return Center(child: Text('Error: ${state.message}'));
+      } else {
+        return Center(
+            child: Text('Unknown state', style: TextStyles.white12Normal));
       }
-      return const SizedBox();
     });
   }
 }

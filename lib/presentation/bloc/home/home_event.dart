@@ -26,11 +26,3 @@ final class AddToFavoritesEvent extends HomeEvent {
   @override
   List<Object?> get props => [character];
 }
-
-final class RemoveFromFavoritesEvent extends HomeEvent {
-  final CharacterEntity character;
-  const RemoveFromFavoritesEvent({required this.character});
-
-  @override
-  List<Object?> get props => [character];
-}
