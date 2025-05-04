@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/core/common/utils/constants/styles/text_styles.dart';
 
-import '../../../../core/common/utils/constants/styles/app_colors.dart';
-import '../../../../feature/character/domain/entities/location.dart';
-import '../../../../media.dart';
+import '../../core/common/utils/constants/styles/app_colors.dart';
+import '../../feature/character/domain/entities/location.dart';
+import '../../media.dart';
 
 class CharacterBox extends StatelessWidget {
   final String name;

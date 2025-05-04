@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/common/utils/constants/styles/text_styles.dart';
 import '../../../feature/character/domain/entities/character_entity.dart';
 import '../../bloc/home/home_bloc.dart';
-import 'widgets/character_box.dart';
+import '../../widgets/character_box.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<CharacterEntity> characters;
