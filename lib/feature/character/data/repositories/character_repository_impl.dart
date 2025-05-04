@@ -41,7 +41,6 @@ class CharacterRepositoryImpl implements CharacterRepository {
   }
 
   @override
-  @override
   ResultFuture<List<CharacterEntity>> getFavoriteCharactersFromCache() async {
     try {
       final result = await localDataSource.getFavoriteCharactersFromCache();

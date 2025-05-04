@@ -26,6 +26,7 @@ class CharacterBox extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
+        height: Media.screenHeight * 0.2,
         color: AppColors.blackSabbath,
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -33,40 +34,35 @@ class CharacterBox extends StatelessWidget {
             children: [
               Image.network(
                 image,
-                height: Media.screenHeight * 0.01,
-                width: Media.screenWidth * 0.1,
+                height: Media.screenHeight * 0.4,
+                width: Media.screenWidth * 0.4,
               ),
-              Column(
-                children: [
-                  Text(
-                    name,
-                    style: TextStyles.white12Medium,
-                  ),
-                  const Spacer(),
-                  Text(
-                    status,
-                    style: TextStyles.white12Normal,
-                  ),
-                  const Spacer(),
-                  Text(
-                    species,
-                    style: TextStyles.white12Normal,
-                  ),
-                  const Spacer(),
-                  Row(
-                    children: [
-                      Text(
-                        origin.name,
-                        style: TextStyles.white12Normal,
-                      ),
-                      Image.network(
-                        origin.url,
-                        height: 50,
-                        width: 50,
-                      ),
-                    ],
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(
+                      name,
+                      style: TextStyles.white16Medium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      status,
+                      style: TextStyles.white16Medium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      species,
+                      style: TextStyles.white16Medium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      origin.name,
+                      style: TextStyles.white16Medium,
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
